@@ -15,6 +15,7 @@
 #define DLFUNC(h, v, name) do { \
     *(void **)(v) = dlsym(h, name); \
     if ((error = dlerror()) != NULL) { \
+        ca_log_crit(0, "symbol %s not found: ", sym[i].sym_name, error); \
         dlclose(h); \
         h = NULL; \
         return rc; \
@@ -29,10 +30,13 @@ ca_load_so(void **phandle, ca_symbol_t *sym, const char *filename)
     int     rc = -1;
     int     i = 0;
 
-    *phandle = dlopen(filename, RTLD_NOW);
+    *phandle = dlopen(filename, RTLD_LAZY);
     if ((error = dlerror()) != NULL) {
+        ca_log_crit(0, "dlopen %s failed: %s", filename, error);
         return -1;
     }
+
+    ca_log_debug(0, "so %s loaded", filename);
 
     while (sym[i].sym_name) {
         if (sym[i].no_error) {
