@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS  = -fPIC -Wall -pipe -DDEBUG -g -D_GNU_SOURCE -D_REENTRANT
 LDFLAGS = -Wl,-e,__sample_module_main
 LIB 	= -ldl -lrt -rdynamic
-INC     = -I ../../src/
+INC     = -I ../../../src/
 OO	= sample.o
 TARGETS = sample.so
 

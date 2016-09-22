@@ -26,6 +26,7 @@ int
 module_process_task(void *context, void *task)
 {
     printf("Hello world\n");
+    ca_log_debug(0, "hello, world");
     return 0;
 }
 
