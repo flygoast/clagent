@@ -1,2 +1,3 @@
 make
 echo $GO_FROM_REVISION
+echo $CLIENT_BUILD_VERSION
